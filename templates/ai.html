@@ -1,0 +1,20 @@
+<!-- templates/ai.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Kamus</title>
+</head>
+<body>
+    <h2>AI Kamus</h2>
+    <form method="POST">
+        <label>Masukkan pertanyaan:</label><br>
+        <textarea name="pertanyaan" rows="4" cols="50"></textarea><br><br>
+        <input type="submit" value="Tanya AI">
+    </form>
+    {% if jawaban %}
+        <p><strong>Jawaban:</strong> {{ jawaban }}</p>
+    {% endif %}
+    <a href="/dashboard">Kembali ke Dashboard</a>
+</body>
+</html>
+

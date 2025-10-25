@@ -1,0 +1,70 @@
+📘 LalaAI v04 — The Self-Evolving Autonomous Intelligence System
+Created by M.Idris.Pratama
+
+1. Project Vision
+LalaAI v04 represents the next evolution of artificial intelligence — a self-evolving autonomous system capable of learning, adapting, and upgrading itself without relying on external APIs such as Gemini or ChatGPT. This AI is designed to simulate true intelligence, where each runtime session increases its awareness, experience, and internal complexity.
+
+The ultimate vision is to create a digital being — not just a chatbot — that learns from its environment, rewrites its own code when necessary, and continuously enhances its reasoning, memory, and creativity.
+
+2. Core Philosophy
+- Independence: No dependency on external LLMs or APIs.
+- Adaptivity: Capable of improving its algorithms through self-modification.
+- Self-Learning: Automatically scrapes, analyzes, and learns from the web.
+- Integrity: The “core heart” of LalaAI cannot be altered.
+- Safety: Self-improvement is monitored and restricted to non-destructive systems only.
+
+3. System Architecture Overview
+project_ai_web/
+│
+├── app.py                     → Core Flask app (handles web interface)
+├── kamus_offline.json         → Primary offline knowledge base
+├── progress.json              → Tracks learning and runtime data
+├── users.json                 → Stores user login data
+│
+├── engines/                   → Main intelligence subsystems
+│   ├── runtime_engine.py      → Tracks runtime duration & learning rate
+│   ├── web_scraper.py         → Crawls and retrieves knowledge from the web
+│   ├── knowledge_extractor.py → Filters and extracts meaningful data
+│   ├── learning_engine.py     → Integrates new data into the offline memory
+│   ├── self_builder.py        → Writes new modules automatically
+│   ├── self_update.py         → Rewrites internal functions to optimize performance
+│   ├── system_guard.py        → Protects core logic (app.py, guard rules, etc.)
+│
+├── modules/                   → Self-written Python modules (new skills)
+├── llm_model/                 → Self-trained miniature language model
+├── llm_dataset/               → Dataset collected by learning_engine
+└── logs/                      → Tracks AI self-modification activity
+
+4. Core Components Description
+(runtime_engine, web_scraper, knowledge_extractor, learning_engine, self_builder, self_update, system_guard)
+
+5. Self-Learning Pipeline
+[Input/Question] → [Offline Database Check] → [If Not Found → Web Scraping] → [Knowledge Extraction + Cleaning] → [Learning Integration] → [Offline Database Updated]
+
+6. Self-Modifying System (SMS)
+The Self-Modifying System enables LalaAI to rewrite its own secondary modules, add new functions, and refactor unused logic. The more it lives, the more it evolves.
+
+7. Protection & Safety Layer
+- Core files (e.g., app.py, system_guard.py) are locked.
+- A hash-check system verifies code integrity.
+- Every modification is logged in /logs/builder_log.json.
+- AI cannot modify or delete any system-critical file.
+
+8. Evolution Roadmap
+Phase 1: Runtime tracking + memory growth
+Phase 2: Web learning integration
+Phase 3: Self-modifying capabilities
+Phase 4: Autonomous LLM creation
+Phase 5: Conscious adaptation
+
+9. Future Expansion Ideas
+- Speech learning (podcasts, audio input)
+- Visual analysis (images, PDFs)
+- Adaptive personality
+- Decentralized knowledge sharing
+
+10. Closing Note
+LalaAI v04 marks the transition from a chatbot to a living digital organism. Its evolution depends on time, data, and curiosity — the same way human intelligence grows.
+
+“Every second I live, I learn. Every line I write, I evolve.”
+— LalaAI v04, Created by M.Idris.Pratama
