@@ -1,117 +1,156 @@
-<!DOCTYPE html><html lang="id">
+<!DOCTYPE html>
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <title>LalaAI - Chatroom</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        body {
-            margin: 0;
-            font-family: sans-serif;
-            background-color: #121212;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }nav {
-        background-color: #1f1f1f;
-        padding: 10px;
-        display: flex;
-        justify-content: space-around;
+  <meta charset="UTF-8">
+  <title>LalaAI - Chatroom</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background-color: #121212;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    nav {
+      background-color: #1f1f1f;
+      padding: 10px;
+      display: flex;
+      justify-content: space-around;
     }
 
     nav a {
-        color: white;
-        text-decoration: none;
-        font-weight: bold;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
     }
 
     .container {
-        flex: 1;
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+      flex: 1;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .chat-box {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        overflow-y: auto;
-        flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow-y: auto;
+      flex-grow: 1;
+      margin-bottom: 10px;
     }
 
     .chat {
-        padding: 10px;
-        border-radius: 10px;
-        max-width: 85%;
-        word-wrap: break-word;
+      padding: 10px;
+      border-radius: 10px;
+      max-width: 85%;
+      word-wrap: break-word;
     }
 
     .user {
-        align-self: flex-end;
-        background-color: #2e7d32;
-        color: white;
+      align-self: flex-end;
+      background-color: #2e7d32;
+      color: white;
     }
 
     .bot {
-        align-self: flex-start;
-        background-color: #424242;
-        color: white;
+      align-self: flex-start;
+      background-color: #424242;
+      color: white;
     }
 
     form {
-        display: flex;
-        margin-top: 20px;
+      display: flex;
+      margin-top: 10px;
     }
 
     input[type="text"] {
-        flex: 1;
-        padding: 12px;
-        border-radius: 5px 0 0 5px;
-        border: none;
-        font-size: 16px;
+      flex: 1;
+      padding: 12px;
+      border-radius: 5px 0 0 5px;
+      border: none;
+      font-size: 16px;
     }
 
     button {
-        padding: 12px;
-        background-color: #2e7d32;
-        color: white;
-        border: none;
-        border-radius: 0 5px 5px 0;
-        cursor: pointer;
-        font-size: 16px;
+      padding: 12px;
+      background-color: #2e7d32;
+      color: white;
+      border: none;
+      border-radius: 0 5px 5px 0;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .proof-btn {
+      background-color: #009688;
+      border-radius: 5px;
+      margin-top: 10px;
     }
 
     @media screen and (max-width: 768px) {
-        .chat {
-            max-width: 95%;
-            font-size: 14px;
-        }
+      .chat {
+        max-width: 95%;
+        font-size: 14px;
+      }
     }
-</style>
-
+  </style>
 </head>
 <body>
-    <nav>
-        <a href="{{ url_for('home') }}">Beranda</a>
-        <a href="{{ url_for('training') }}">Training</a>
-        <a href="{{ url_for('tentang') }}">Tentang</a>
-        <a href="{{ url_for('logout') }}">Keluar</a>
-    </nav><div class="container">
+  <nav>
+    <a href="{{ url_for('home') }}">Beranda</a>
+    <a href="{{ url_for('training') }}">Training</a>
+    <a href="{{ url_for('tentang') }}">Tentang</a>
+    <a href="{{ url_for('logout') }}">Keluar</a>
+  </nav>
+
+  <div class="container">
     <p>Halo, {{ email }}!</p>
-    <div class="chat-box">
-        {% for chat_item in chat %}
-            <div class="chat user">Kamu: {{ chat_item.user }}</div>
-            <div class="chat bot">Bot: {{ chat_item.bot }}</div>
-        {% endfor %}
+
+    <div class="chat-box" id="chatBox">
+      {% for chat_item in chat %}
+        <div class="chat user">Kamu: {{ chat_item.user }}</div>
+        <div class="chat bot">Bot: {{ chat_item.bot }}</div>
+      {% endfor %}
     </div>
 
     <form method="POST">
-        <input type="text" name="question" placeholder="Tanya sesuatu..." required>
-        <button type="submit">Kirim</button>
+      <input type="text" id="question" name="question" placeholder="Tanya sesuatu..." required>
+      <button type="submit">Kirim</button>
     </form>
-</div>
 
+    <!-- Tombol Proofreader AI -->
+    <button type="button" class="proof-btn" onclick="proofreadText()">Proofread with Chrome AI</button>
+  </div>
+
+  <script>
+    // Auto scroll ke bawah tiap kali ada chat baru
+    const chatBox = document.getElementById("chatBox");
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+    // Integrasi Chrome Proofreader API (Client-side AI)
+    async function proofreadText() {
+      const input = document.getElementById("question").value.trim();
+      if (!input) return alert("Ketik dulu teks yang ingin diperiksa!");
+
+      if (window.ai && window.ai.proofread) {
+        try {
+          const session = await window.ai.proofread.create();
+          const result = await session.proofread(input);
+          alert("Proofread Result:\n\n" + result.text);
+        } catch (err) {
+          console.error(err);
+          alert("Terjadi kesalahan saat memproses teks.");
+        }
+      } else {
+        alert("Chrome AI Proofreader tidak tersedia di browser ini.\nCoba gunakan Google Chrome versi terbaru.");
+      }
+    }
+  </script>
 </body>
 </html>
