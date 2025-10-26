@@ -26,6 +26,18 @@ Supports explanation generation, concept simplification, and tutoring-like inter
 5. Expandable & Open
 Users and developers can add custom knowledge directly into the JSON dictionary.
 Supports integration with additional APIs, local datasets, and NLP modules.
+## Hybrid AI System – LalaAI Web
+
+LalaAI is an intelligent web chatbot developed by M.idris.pratama.
+It combines three AI layers:
+
+1. **Offline Dictionary (JSON)** – Fast and local response base.
+2. **Gemini API Integration** – Cloud-based large language understanding.
+3. **Chrome Built-in AI (Proofreader API)** – Local client-side AI running directly in Chrome using the new AI APIs.
+
+This hybrid approach allows LalaAI to operate both online and offline, 
+providing privacy, flexibility, and adaptive intelligence.
+
 🧩 Tech Stack
 Component
 Technology
